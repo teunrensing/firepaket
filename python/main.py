@@ -20,7 +20,9 @@ while True:
     data_packet = pk.construct_data_packet(left_motor_speed,right_motor_speed,fuel_level,temperature)
     print("Sending Data Packet:", data_packet.hex())
 	
-    command_packet = struct.pack('>BBHHBHB', START_BYTE, DATA_PACKET, left_motor_speed, right_motor_speed, fuel_level, int(temperature * 100),0)
+    temperature_int = int(temperature * 100)
+    fl_int = int(fuel_level)
+    command_packet = struct.pack('>BBHHBHB', START_BYTE, DATA_PACKET, left_motor_speed, right_motor_speed, fl_int, temperature_int,0)
 	# Add checksum
     checksum = sum(command_packet) & 0xFF
     command_packet = command_packet[:-1] + bytes([checksum]) + bytes([END_BYTE])
@@ -35,6 +37,8 @@ while True:
     # Simulate sensor data updates
     fuel_level = max(0, fuel_level - 0.1)  # Decrease fuel level
     temperature += random.uniform(-0.1, 0.1)  # Random temperature fluctuation
+    print("fuel level: ", fuel_level)
+    print("temperature: ", temperature)
     
     # Wait before next iteration
     time.sleep(1)
