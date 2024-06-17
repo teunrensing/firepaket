@@ -19,7 +19,7 @@ def calculate_checksum(data):
 def construct_data_packet(speed, fuel_level, temperature):
     temperature_int = int(temperature * 100)
     fl_int = int(fuel_level)
-    packet = struct.pack('>BBHHBHB', START_BYTE, DATA_PACKET, speed, fl_int, temperature_int, 0)
+    packet = struct.pack('>BBHBHB', START_BYTE, DATA_PACKET, speed, fl_int, temperature_int, 0)
     checksum = calculate_checksum(packet[:-1])
     packet = packet[:-1] + bytes([checksum]) + bytes([END_BYTE])
     return packet
