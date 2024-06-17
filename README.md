@@ -1,5 +1,3 @@
-Certainly! Below is a README file template for your C packet handling library. This file will provide an overview of the library, its purpose, usage instructions, and example code.
-
 ---
 
 # RC Caterpillar Fire Extinguisher Robot Packet Handling Library
